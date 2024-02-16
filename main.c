@@ -6,7 +6,7 @@
 /*   By: lnaulak <lnaulak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:52:41 by lnaulak           #+#    #+#             */
-/*   Updated: 2024/02/16 13:09:57 by lnaulak          ###   ########.fr       */
+/*   Updated: 2024/02/16 13:36:53 by lnaulak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	end_of_file(t_data *data, char *user_input)
 {
-	free_env(data->env);
+	free_env(data->env);//free env
 	free(user_input);
 	free(data->pwd);
 	ft_putstr_fd("exit\n", 2);
@@ -25,8 +25,8 @@ int	init_data(int ac, char **av, char **env, t_data *data)
 {
 	ac = 0;
 	av = NULL;
-	data->env = dup_env(env);
-	data->pwd = getcwd(NULL, 0);
+	data->env = dup_env(env);//get malloc of enviroment
+	data->pwd = getcwd(NULL, 0);//might need to change
 	data->fd_in = 0;
 	data->fd_out = 1;
 	data->redir = 1;
@@ -40,6 +40,9 @@ int	main(int ac, char **av, char **env)
 {
 	t_data	data;
 	int		gnl;
+	int		g_status;
+	char	*g_user_input;
+	int		g_quit;
 
 	if (init_data(ac, av, env, &data) == 1)
 		return (1);
@@ -49,7 +52,7 @@ int	main(int ac, char **av, char **env)
 	{
 		g_quit = 0;
 		free(g_user_input);
-		sig_init();
+		sig_init();//init signal
 		ft_putstr_fd("minishell> ", 2);
 		gnl = get_next_line(0, &g_user_input);
 		if (gnl != 0)
