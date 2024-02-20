@@ -6,7 +6,7 @@
 /*   By: lnaulak <lnaulak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:45:26 by lnaulak           #+#    #+#             */
-/*   Updated: 2024/02/20 13:44:18 by npaturzo         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:01:11 by npaturzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void			free_env(char **env);
 char			**dup_env(char **env);
 
 void	ms_echo(int argc, char *args[]);
+int		ms_cd(char *path);
 void	ms_pwd(void);
 void	ms_env(char *env[]);
 
