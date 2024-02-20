@@ -6,7 +6,7 @@
 /*   By: lnaulak <lnaulak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:45:26 by lnaulak           #+#    #+#             */
-/*   Updated: 2024/02/16 13:35:45 by lnaulak          ###   ########.fr       */
+/*   Updated: 2024/02/20 13:09:36 by npaturzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ typedef	struct	s_data
 
 void			free_env(char **env);
 char			**dup_env(char **env);
+
+void	ms_echo(int argc, char *args[]);
 
 #endif
