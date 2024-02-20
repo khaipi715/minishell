@@ -6,7 +6,7 @@
 /*   By: lnaulak <lnaulak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:45:26 by lnaulak           #+#    #+#             */
-/*   Updated: 2024/02/20 13:13:38 by npaturzo         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:31:11 by npaturzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <errno.h>
 # include <signal.h>
 # include <dirent.h>
+# include <limits.h>
 
 # include <stdio.h>
 # include <readline/readline.h>
