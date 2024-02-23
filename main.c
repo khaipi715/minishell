@@ -6,7 +6,7 @@
 /*   By: lnaulak <lnaulak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:52:41 by lnaulak           #+#    #+#             */
-/*   Updated: 2024/02/16 13:36:53 by lnaulak          ###   ########.fr       */
+/*   Updated: 2024/02/23 13:16:25 by lnaulak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,26 +39,15 @@ int	init_data(int ac, char **av, char **env, t_data *data)
 int	main(int ac, char **av, char **env)
 {
 	t_data	data;
-	int		gnl;
-	int		g_status;
-	char	*g_user_input;
-	int		g_quit;
+	char	*input;
+	char	**token;
 
 	if (init_data(ac, av, env, &data) == 1)
 		return (1);
-	g_status = 0;
-	g_user_input = NULL;
 	while (1)
 	{
-		g_quit = 0;
-		free(g_user_input);
-		sig_init();//init signal
-		ft_putstr_fd("minishell> ", 2);
-		gnl = get_next_line(0, &g_user_input);
-		if (gnl != 0)
-			end_of_file(&data, g_user_input);
-		else
-			parser_start(g_user_input, &data);
+		input = readline("minshell$ ");
+		token = ft_tokenizer(input);
 	}
 	return (0);
 }
