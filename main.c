@@ -6,7 +6,7 @@
 /*   By: lnaulak <lnaulak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:52:41 by lnaulak           #+#    #+#             */
-/*   Updated: 2024/02/23 13:16:25 by lnaulak          ###   ########.fr       */
+/*   Updated: 2024/02/27 15:51:06 by lnaulak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,32 @@ int	init_data(int ac, char **av, char **env, t_data *data)
 		return (0);
 }
 
+t_list	*ft_newtoken(char *content)
+{
+	t_list	*rtn;
+
+	rtn = (t_list *)malloc(sizeof(t_list));
+	if (!rtn)
+		return (rtn = NULL);
+	rtn->next = NULL;
+	rtn->content = content;
+	return (rtn); 
+}
+
 int	main(int ac, char **av, char **env)
 {
-	t_data	data;
+	t_data		data;
+	t_tokens	*tokens;
 	char	*input;
-	char	**token;
+	int		i;
 
 	if (init_data(ac, av, env, &data) == 1)
 		return (1);
 	while (1)
 	{
 		input = readline("minshell$ ");
-		token = ft_tokenizer(input);
+		i = ft_tokens(input);
+
 	}
 	return (0);
 }
