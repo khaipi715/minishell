@@ -6,7 +6,7 @@
 /*   By: lnaulak <lnaulak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:52:41 by lnaulak           #+#    #+#             */
-/*   Updated: 2024/02/29 10:39:53 by lnaulak          ###   ########.fr       */
+/*   Updated: 2024/02/29 15:14:32 by lnaulak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,34 +36,49 @@ int	init_data(int ac, char **av, char **env, t_data *data)
 		return (0);
 }
 
-t_list	*ft_newtoken(char *content)
+// t_list	*ft_newtoken(char *content)
+// {
+// 	t_list	*rtn;
+
+// 	rtn = (t_list *)malloc(sizeof(t_list));
+// 	if (!rtn)
+// 		return (rtn = NULL);
+// 	rtn->next = NULL;
+// 	rtn->content = content;
+// 	return (rtn); 
+// }
+void	ft_cmd(char *argv[], char *envp[])
 {
-	t_list	*rtn;
+	char	**command;
 
-	rtn = (t_list *)malloc(sizeof(t_list));
-	if (!rtn)
-		return (rtn = NULL);
-	rtn->next = NULL;
-	rtn->content = content;
-	return (rtn); 
+	command = sep_command(argv[0], envp);
+	execve(command[0], argv, envp);
 }
-
 int	main(int ac, char **av, char **env)
 {
 	t_data		data;
 	char	*input;
 	char	**s;
 	int		i;
+	pid_t	pid;
 
+	
 	if (init_data(ac, av, env, &data) == 1)
 		return (1);
 	while (1)
 	{
-		i = 0;
-		input = readline("minshell$ ");
-		s = ft_tokenizer(input);
-		while (s[i])
-			printf("%s\n", s[i++]);
+		pid = fork();
+		if (pid == -1)
+			return (1);
+		else if (pid == 0)
+		{
+			i = 0;
+			input = readline("minshell$ ");
+			s = ft_tokenizer(input);
+			ft_cmd(s, env);
+		}
+		else
+			wait(NULL);
 	}
 	return (0);
 }
