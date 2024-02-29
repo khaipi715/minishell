@@ -1,43 +1,106 @@
+NAME = minishell
+MKDIR = mkdir
 
-SRCS	= main.c
+CC = gcc
 
-LIBFT	= libft/libft.a
+LIBFTP = libft
+PATHB = build/
+PATHO = build/objs/
+PATHS = src/
+PATHSL = src/lexer/
+PATHSP = src/parser/
+PATHSB = src/builtins/
+PATHSEX = src/expander/
+PATHSU = src/utils/
+PATHSE = src/error/
+PATHP = src/pipex/
+PATHEX = src/executor/
 
-OBJS	= $(SRCS:.c=.o)
+BUILD_PATHS = $(PATHB) $(PATHO)
 
-NAME	= minishell
+src	=	src/main.c \
+		src/ft_list_tokens.c \
 
-LIBFT	= libft/libft.a
+OBJS	=	$(addprefix $(PATHO), $(notdir $(patsubst %.c, %.o, $(src))))
 
-CLANG	= clang
+FLAGS	=	-Wall -Werror -Wextra -g #-fsanitize=address
 
-FLAGS	= -Wall -Wextra -Werror
+LIBFT	=	libft/libft.a
 
-INCLUDE	= -L libft -lft
+HEADER	=	.includes/builtins.h \
+			.includes/color.h \
+			.includes/error.h \
+			.includes/executor.h \
+			.includes/lexer.h \
+			.includes/minishell.h \
+			.includes/parser.h \
+			.includes/utils.h 
 
+READLINE_DIR = $(shell brew --prefix readline)
 
+READLINE_LIB = -lreadline -lhistory -L $(READLINE_DIR)/lib
+	
+INCLUDES =-Iincludes -I$(PATHP) -I$(LIBFTP) -I$(READLINE_DIR)/include 
 
+all: $(BUILD_PATHS) $(NAME)
 
-all:	$(NAME)
+$(PATHO)%.o:: $(PATHS)%.c
+	@echo "Compiling ${notdir $<}			in	$(PATHS)"
+	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
-.PHONY:	clean fclean re bonus bench bclean
+$(PATHO)%.o:: $(PATHSL)%.c $(HEADERS)
+	@echo "Compiling ${notdir $<}			in	$(PATHSL)"
+	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
-$(NAME): $(OBJS)
-	cd libft && $(MAKE)
-	$(CLANG) $(FLAGS) -o $(NAME) $(OBJS) $(INCLUDE)
+$(PATHO)%.o:: $(PATHSP)%.c $(HEADERS)
+	@echo "Compiling ${notdir $<}			in	$(PATHSP)"
+	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
+
+$(PATHO)%.o:: $(PATHSB)%.c $(HEADERS)
+	@echo "Compiling ${notdir $<}			in	$(PATHSB)"
+	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
+
+$(PATHO)%.o:: $(PATHSEX)%.c $(HEADERS)
+	@echo "Compiling ${notdir $<}			in	$(PATHSEX)"
+	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
+
+$(PATHO)%.o:: $(PATHSU)%.c $(HEADERS)
+	@echo "Compiling ${notdir $<}			in	$(PATHSU)"
+	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
+
+$(PATHO)%.o:: $(PATHSE)%.c $(HEADERS)
+	@echo "Compiling ${notdir $<}			in	$(PATHSE)"
+	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
+
+$(PATHO)%.o:: $(PATHEX)%.c $(HEADERS)
+	@echo "Compiling ${notdir $<}			in	$(PATHEX)"
+	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
+
+$(NAME): $(LIBFT) $(OBJS) $(HEADERS)
+	@$(CC) $(FLAGS) $(LIBFT) $(OBJS) $(READLINE_LIB) -o $(NAME)
+
+	@echo "Success"
+
+$(LIBFT):
+	@$(MAKE) -C ./libft
+
+$(PATHB):
+	@$(MKDIR) $(PATHB)
+
+$(PATHO):
+	@$(MKDIR) $(PATHO)
 
 clean:
-	rm -f $(OBJS) $(B_OBJS)
-	cd libft && $(MAKE) clean
+	@echo "Cleaning"
+	@rm -f $(OBJS)
+	@rm -f $(PATHB).tmp*
+	@rmdir $(PATHO) $(PATHB)
+	@make fclean -C libft
 
 fclean: clean
-	rm -f $(NAME) $(BONUS)
-	cd libft && $(MAKE) fclean
+	@rm -f $(NAME)
+	@rm -f $(LIBFT)
 
 re: fclean all
 
-%.o: %.c
-	$(CLANG) $(FLAGS) -c $<  -o $(<:.c=.o)
-
-
-# valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind-out.txt ./minishell
+.PRECIOUS: $(PATHO)%.o
