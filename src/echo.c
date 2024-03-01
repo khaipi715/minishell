@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npaturzo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lnaulak <lnaulak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 12:44:09 by npaturzo          #+#    #+#             */
-/*   Updated: 2024/02/20 13:07:26 by npaturzo         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:31:19 by lnaulak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //echo with option -n
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 int	ms_echo_ops(char *str)
 {
@@ -27,6 +27,7 @@ void	ms_echo(int argc, char *args[])
 {
 	int	n;
 	int	i;
+	printf(" build in\n");
 
 	n = ms_echo_ops(args[0]);
 	i = 0;

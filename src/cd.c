@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npaturzo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lnaulak <lnaulak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:55:35 by npaturzo          #+#    #+#             */
-/*   Updated: 2024/02/20 14:01:05 by npaturzo         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:36:54 by lnaulak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 //could just use chdir
 
 int	ms_cd(char *path)
 {
 	int	ret;
-
+	printf(" build in\n");
 	ret = chdir(path);
 	return (ret);
 }

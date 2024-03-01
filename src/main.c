@@ -6,11 +6,11 @@
 /*   By: lnaulak <lnaulak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:52:41 by lnaulak           #+#    #+#             */
-/*   Updated: 2024/02/29 15:14:32 by lnaulak          ###   ########.fr       */
+/*   Updated: 2024/03/01 13:06:58 by lnaulak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 // void	end_of_file(t_data *data, char *user_input)
 // {
@@ -47,13 +47,28 @@ int	init_data(int ac, char **av, char **env, t_data *data)
 // 	rtn->content = content;
 // 	return (rtn); 
 // }
-void	ft_cmd(char *argv[], char *envp[])
+
+void	ft_cmd(int argc, char *argv[], char *envp[])
 {
 	char	**command;
 
+	if (ft_strcmp(argv[0], "echo") == 0 || ft_strcmp(argv[0], "env") == 0 || ft_strcmp(argv[0], "pwd") == 0|| ft_strcmp(argv[0], "cd") == 0)
+	{
+		if (ft_strcmp(argv[0], "echo") == 0)
+			ms_echo(argc, argv);//not working
+		else if (ft_strcmp(argv[0], "env") == 0)
+			ms_env(envp);//working
+		else if (ft_strcmp(argv[0], "pwd") == 0)
+			ms_cd(*envp);//not working
+		else if (ft_strcmp(argv[0], "cd") == 0)
+			ms_cd(*argv);//not working
+		return ;
+	}
+	printf("not build in\n");
 	command = sep_command(argv[0], envp);
 	execve(command[0], argv, envp);
 }
+
 int	main(int ac, char **av, char **env)
 {
 	t_data		data;
@@ -62,7 +77,7 @@ int	main(int ac, char **av, char **env)
 	int		i;
 	pid_t	pid;
 
-	
+
 	if (init_data(ac, av, env, &data) == 1)
 		return (1);
 	while (1)
@@ -75,7 +90,7 @@ int	main(int ac, char **av, char **env)
 			i = 0;
 			input = readline("minshell$ ");
 			s = ft_tokenizer(input);
-			ft_cmd(s, env);
+			ft_cmd(ac, s, env);//for all in build function it should be in the first argument so arg[0]
 		}
 		else
 			wait(NULL);

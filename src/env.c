@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npaturzo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lnaulak <lnaulak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:10:10 by npaturzo          #+#    #+#             */
-/*   Updated: 2024/02/20 13:13:43 by npaturzo         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:31:22 by lnaulak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 void	ms_env(char *env[])
 {
 	int	i;
+	printf(" build in\n");
 
 	i = 0;
 	while (env[i])

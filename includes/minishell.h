@@ -6,7 +6,7 @@
 /*   By: lnaulak <lnaulak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 10:45:26 by lnaulak           #+#    #+#             */
-/*   Updated: 2024/02/29 14:27:33 by lnaulak          ###   ########.fr       */
+/*   Updated: 2024/03/01 12:07:00 by lnaulak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ typedef	struct	s_tokens
 	char			*s;
 	struct s_tokens	*next;
 }				t_tokens;
+
+int				ms_cd(char *path);
+void			ms_echo(int argc, char *args[]);
+void			ms_env(char *env[]);
 
 char			**px_split(char *str);
 

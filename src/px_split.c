@@ -1,4 +1,16 @@
-#include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   px_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lnaulak <lnaulak@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/01 12:32:03 by lnaulak           #+#    #+#             */
+/*   Updated: 2024/03/01 12:58:41 by lnaulak          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/minishell.h"
 
 int	get_word2(int in_word, char *str, int i)
 {
@@ -35,7 +47,7 @@ int	get_word(char *str, char **ret, int ret_pos)
 	else
 		in_word = 1;
 	len = get_word2(in_word, str, i);
-	ret[ret_pos] = (char *) malloc(len + 1);
+	ret[ret_pos] = (char *)malloc(len + 1);
 	while (j < len)
 	{
 		ret[ret_pos][j] = str[i + j];

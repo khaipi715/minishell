@@ -3,26 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npaturzo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lnaulak <lnaulak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:24:24 by npaturzo          #+#    #+#             */
-/*   Updated: 2024/02/20 13:44:20 by npaturzo         ###   ########.fr       */
+/*   Updated: 2024/03/01 13:04:43 by lnaulak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
 void	ms_pwd(void)
 {
 	char	path[PATH_MAX + 1];
+	printf("pwd build in\n");
 
 	getcwd(path, PATH_MAX);
 	printf("%s\n", path);
 }
 
-/*
-int	main(void)
-{
-	ms_pwd();
-}
-*/
+// int	main(void)
+// {
+// 	ms_pwd();
+// }
