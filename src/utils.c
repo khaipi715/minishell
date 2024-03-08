@@ -5,87 +5,51 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lnaulak <lnaulak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/01 12:31:55 by lnaulak           #+#    #+#             */
-/*   Updated: 2024/03/01 13:02:15 by lnaulak          ###   ########.fr       */
+/*   Created: 2024/03/08 12:25:44 by lnaulak           #+#    #+#             */
+/*   Updated: 2024/03/08 13:30:22 by lnaulak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	free_all(char **to_free)
+int	write_error(char *str)
 {
-	int	i;
-
-	i = 0;
-	while (to_free[i])
-	{
-		free(to_free[i]);
-		i++;
-	}
-	free(to_free);
-}
-
-int	path_check(char *str)
-{
-	if (str[0] == 'P')
-		if (str[1] == 'A')
-			if (str[2] == 'T')
-				if (str[3] == 'H')
-					if (str[4] == '=')
-						return (0);
+	printf("Error: %s\n", str);
 	return (1);
 }
 
-char	*get_env(char *envp[])
+int	ft_isspace(char c)
 {
-	int		i;
-	char	*ret;
-
-	i = 0;
-	while (envp[i])
-	{
-		if (path_check(envp[i]) == 0)
-			break ;
-		i++;
-	}
-	if (envp[i] == NULL)
-		return (NULL);
-	ret = ft_strdup((const char *)&envp[i][5]);
-	return (ret);
+	return (c == ' ' || c == '\n' || c == '\t');
 }
 
-char	*get_path(char *cmd, char *env)
+int	ft_isredirect(char c)
 {
-	int		i;
-	char	**paths;
-	char	*path;
-	char	*exec;
-
-	paths = ft_split(env, ':');
-	i = 0;
-	while (paths[i])
-	{
-		path = ft_strjoin(paths[i], "/");
-		exec = ft_strjoin(path, cmd);
-		free(path);
-		if (access(exec, X_OK) == 0)
-		{
-			free_all(paths);
-			return (exec);
-		}
-		i++;
-	}
-	ft_putstr_fd("Error: Command not found\n", 2);
-	return (NULL);
+	return (c == '<' || c == '>' || c == '|');
 }
 
-char	**sep_command(char *cmd, char *envp[])
+char	*display_prompt_msg(void)
 {
-	char	**ret;
-	char	*env;
+	char	*line;
 
-	ret = px_split(cmd);
-	env = get_env(envp);
-	ret[0] = get_path(ret[0], env);
-	return (ret);
+	line = readline("42-Minishell ~ $ ");
+	if (ft_strlen(line) > 0)
+		add_history(line);
+	return (line);
+}
+
+int	ft_tlen(char **s)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (s[i] != NULL)
+	{
+		if (s[i][0] == '<' || s[i][0] == '>' || s[i][0] == '|')
+			j++;
+		i++;
+	}
+	return ((2 * j) + 1);
 }

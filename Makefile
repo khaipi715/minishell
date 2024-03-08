@@ -20,12 +20,15 @@ BUILD_PATHS = $(PATHB) $(PATHO)
 
 src	=	src/main.c \
 		src/ft_list_tokens.c \
-		src/utils.c \
-		src/px_split.c \
-		src/cd.c \
-		src/echo.c \
-		src/env.c \
-		src/pwd.c \
+		src/engine.c	\
+		src/init_all.c	\
+		src/utils.c		\
+		# src/utils.c \
+		# src/px_split.c \
+		# src/cd.c \
+		# src/echo.c \
+		# src/env.c \
+		# src/pwd.c \
 
 
 OBJS	=	$(addprefix $(PATHO), $(notdir $(patsubst %.c, %.o, $(src))))

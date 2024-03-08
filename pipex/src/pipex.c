@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npaturzo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lnaulak <lnaulak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:22:14 by npaturzo          #+#    #+#             */
-/*   Updated: 2024/01/16 12:56:17 by npaturzo         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:32:55 by lnaulak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	cmd1(char *argv[], char *envp[], int *pfd)
 		exit(1);
 	}
 	dup2(in_fd, 0);
-	dup2(pfd[1], 1);
-	close(pfd[0]);
+	dup2(pfd[1], 1);//to put the command to the write end
+	close(pfd[0]);//to not cause dead lock as this pipe will be the writing end only
 	command = sep_command(argv[2], envp);
 	execve(command[0], command, envp);
 }
@@ -43,7 +43,7 @@ void	cmd2(char *argv[], char *envp[], int *pfd)
 	}
 	dup2(pfd[0], 0);
 	dup2(out_fd, 1);
-	close(pfd[1]);
+	close(pfd[1]);//to not cause dead lock as this function is only used for reading
 	command = sep_command(argv[3], envp);
 	execve(command[0], command, envp);
 }
