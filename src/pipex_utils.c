@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npaturzo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lnaulak <lnaulak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:24:10 by npaturzo          #+#    #+#             */
-/*   Updated: 2024/01/16 12:47:11 by npaturzo         ###   ########.fr       */
+/*   Updated: 2024/03/12 11:21:00 by lnaulak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/minishell.h"
 
 void	free_all(char **to_free)
 {

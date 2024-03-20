@@ -23,8 +23,8 @@ src	=	src/main.c \
 		src/engine.c	\
 		src/init_all.c	\
 		src/utils.c		\
-		# src/utils.c \
-		# src/px_split.c \
+		src/pipex_utils.c \
+		src/px_split.c \
 		# src/cd.c \
 		# src/echo.c \
 		# src/env.c \

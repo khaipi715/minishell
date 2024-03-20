@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   px_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npaturzo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lnaulak <lnaulak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:15:48 by npaturzo          #+#    #+#             */
-/*   Updated: 2024/01/16 13:26:47 by npaturzo         ###   ########.fr       */
+/*   Updated: 2024/03/12 11:21:16 by lnaulak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/minishell.h"
 
 int	get_word2(int in_word, char *str, int i)
 {
